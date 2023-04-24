@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FrameObject : MonoBehaviour
 {
+    private bool isSelected = false; //???
+    public GameObject frame;
+    public GameObject picture;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +19,13 @@ public class FrameObject : MonoBehaviour
     {
         
     }
+
+/*    public void setFrame(GameObject frame)
+    {
+        this.frame = frame;
+    }
+    public void setPicture(Texture2D picture)
+    {
+        this.picture = picture;
+    }*/
 }

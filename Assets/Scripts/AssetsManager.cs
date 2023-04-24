@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AssetsManager : MonoBehaviour
 {
+    public static AssetsManager Instance;
+    public GameObject[] frames;
+    public Texture2D[] pictures;
     // Start is called before the first frame update
     void Start()
     {

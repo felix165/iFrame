@@ -54,7 +54,7 @@ public class PlaceManager : MonoBehaviour
         newPlacedObject = Instantiate(objectToPlace, placeIndicator.transform.position, Quaternion.identity);
         if(newPlacedObject is null)
         {
-            onClickFailed?.Invoke();
+            onClickFailed?.Invoke(); 
         }
     }
 
