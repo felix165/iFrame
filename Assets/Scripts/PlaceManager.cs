@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class PlaceManager : MonoBehaviour
 {
@@ -34,6 +35,9 @@ public class PlaceManager : MonoBehaviour
     public float speed=0.1f;
 
 
+    public UnityEvent onClickFailed;
+    public UnityEvent onClickSuccess;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +52,10 @@ public class PlaceManager : MonoBehaviour
     public void PlaceObject()
     {
         newPlacedObject = Instantiate(objectToPlace, placeIndicator.transform.position, Quaternion.identity);
+        if(newPlacedObject is null)
+        {
+            onClickFailed?.Invoke();
+        }
     }
 
     //Destroy Selected Object
@@ -77,6 +85,11 @@ public class PlaceManager : MonoBehaviour
             selectedObject = hitObject.transform.gameObject;
             //Make selected object, a bit transparent or more shining
             mode = Mode.SelectingMode;
+            onClickSuccess?.Invoke();
+        }
+        else
+        {
+            onClickFailed?.Invoke();
         }
     }
 
