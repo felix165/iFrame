@@ -147,6 +147,8 @@ public class PlaceManager : MonoBehaviour
         
     }
 
+    //Scalling Selected Object //Scale use input?
+
     
     //Enter Editing Mode
     public void EditObject()
