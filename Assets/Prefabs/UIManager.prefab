@@ -3674,6 +3674,7 @@ GameObject:
   - component: {fileID: 3925027182789123391}
   - component: {fileID: 7036422990801768489}
   - component: {fileID: 997295906999378935}
+  - component: {fileID: 7682834257950427307}
   - component: {fileID: 2484225041255747901}
   m_Layer: 0
   m_Name: HorizontalScrollView
@@ -3741,6 +3742,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7682834257950427307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5129226062364041111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e0c82a6b6e52045b35891d4937e76b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfItem: 10
+  itemPrefab: {fileID: 7902604606941628330}
+  itemParent: {fileID: 6828206969838178102}
 --- !u!114 &2484225041255747901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3869,6 +3885,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6828206969838178102}
     m_Modifications:
+    - target: {fileID: 279227174412765546, guid: af4a6427b1c851246993dc1811d0f687,
+        type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 1042956643920828781, guid: af4a6427b1c851246993dc1811d0f687,
+        type: 3}
     - target: {fileID: 1042956643920828781, guid: af4a6427b1c851246993dc1811d0f687,
         type: 3}
       propertyPath: m_Name
@@ -3984,6 +4006,12 @@ PrefabInstance:
 --- !u!224 &5059898714825958411 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2732204605973723852, guid: af4a6427b1c851246993dc1811d0f687,
+    type: 3}
+  m_PrefabInstance: {fileID: 7193060661224005319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7902604606941628330 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1042956643920828781, guid: af4a6427b1c851246993dc1811d0f687,
     type: 3}
   m_PrefabInstance: {fileID: 7193060661224005319}
   m_PrefabAsset: {fileID: 0}

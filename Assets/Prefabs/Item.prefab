@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2732204605973723852}
   - component: {fileID: 5433996530872431535}
+  - component: {fileID: 279227174412765546}
   - component: {fileID: 1898847317877770397}
   - component: {fileID: 4010643284246398675}
   m_Layer: 0
@@ -48,6 +49,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042956643920828781}
   m_CullTransparentMesh: 1
+--- !u!114 &279227174412765546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042956643920828781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d789b9f6f7be5e4bb83df78ab0340d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemIndex: 0
+  itemsScrollViewController: {fileID: 0}
+  text: {fileID: 5085733416426751215}
+  item: {fileID: 0}
 --- !u!114 &1898847317877770397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +138,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1898847317877770397}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 279227174412765546}
+        m_TargetAssemblyTypeName: ItemButton, Assembly-CSharp
+        m_MethodName: OnItemButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1390431692846350725
 GameObject:
   m_ObjectHideFlags: 0
