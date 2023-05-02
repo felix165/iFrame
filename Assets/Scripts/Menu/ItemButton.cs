@@ -30,6 +30,7 @@ public class ItemButton : MonoBehaviour
     public void OnItemButtonClick()
     {
         Debug.Log(itemIndex.ToString());
+        GameObject.Find("DebugText").GetComponent<TMP_Text>().text= "Selected"+ this.itemIndex;
         //Change object frame/pict with this item
 
     }

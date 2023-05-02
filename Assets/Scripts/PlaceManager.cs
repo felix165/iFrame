@@ -156,6 +156,8 @@ public class PlaceManager : MonoBehaviour
         mode= Mode.EditingMode;
     }
 
+
+    //unused
     //Apply selected frame or picture of Selected Object
     public void ApplyEditing()
     {

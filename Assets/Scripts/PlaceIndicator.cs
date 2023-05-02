@@ -8,7 +8,7 @@ public class PlaceIndicator : MonoBehaviour
     private ARRaycastManager raycastManager;
     private GameObject indicator;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
-
+    [HideInInspector]
     public Vector2 ray = new Vector2(Screen.width / 2, Screen.height / 2);
     // Start is called before the first frame update
     void Start()
