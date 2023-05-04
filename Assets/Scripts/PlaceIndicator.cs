@@ -21,7 +21,7 @@ public class PlaceIndicator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ray = new Vector2(Screen.width/2, Screen.height/2);
+        ray = new Vector2(Screen.width / 2, Screen.height / 2);
         if (raycastManager.Raycast(ray, hits, TrackableType.Planes))
         {
             Pose hitPose = hits[0].pose;
