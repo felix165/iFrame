@@ -6,7 +6,11 @@ public class AssetsManager : MonoBehaviour
 {
     public static AssetsManager Instance;
     public GameObject[] frames;
+    public Sprite[] spriteOfFrame; 
     public GameObject[] pictures;
+    public Sprite[] spriteOfPicture;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,5 +21,18 @@ public class AssetsManager : MonoBehaviour
     void Update()
     {
         
+    }
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            Instance = this;
+        }
+        DontDestroyOnLoad(this.gameObject);
     }
 }

@@ -31,7 +31,7 @@ public class PlaceManager : MonoBehaviour
     public TextMeshProUGUI text; //For Debug use
 
     private GameObject newPlacedObject;
-    private GameObject selectedObject;
+    [HideInInspector] public GameObject selectedObject;
     public float speed=0.1f;
 
 
