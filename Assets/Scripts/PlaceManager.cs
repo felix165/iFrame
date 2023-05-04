@@ -157,13 +157,6 @@ public class PlaceManager : MonoBehaviour
     }
 
 
-    //unused
-    //Apply selected frame or picture of Selected Object
-    public void ApplyEditing()
-    {
-        //Change frame of selected object
-        //Change picture of selected object
-    }
 
 
 
