@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum Type
+{
+    Frame,
+    Picture,
+}
+
 public class AssetsManager : MonoBehaviour
 {
     public static AssetsManager Instance;

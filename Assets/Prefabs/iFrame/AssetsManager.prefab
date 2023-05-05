@@ -46,9 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frames:
   - {fileID: 4831366664335394756, guid: 40b92319c8e25ac4aaf9c7e1447f8be2, type: 3}
+  - {fileID: 4831366664335394756, guid: 46b3d0693d665de478e2975ff73d3421, type: 3}
   spriteOfFrame:
+  - {fileID: 21300000, guid: 88b3fb888ffe00c4298f014b10ba9128, type: 3}
   - {fileID: 21300000, guid: 88b3fb888ffe00c4298f014b10ba9128, type: 3}
   pictures:
   - {fileID: 7029271144506097930, guid: 15baca6d257be36439eacbb279484dc9, type: 3}
   spriteOfPicture:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 73abea180bf425949a8d040f52502674, type: 3}

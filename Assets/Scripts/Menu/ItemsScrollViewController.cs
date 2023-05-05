@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class ItemsScrollViewController : MonoBehaviour
 {
-    public enum Type
-    {
-        Frame,
-        Picture,
-    }
+    
     [SerializeField] int numberOfItem;
     [SerializeField] GameObject itemPrefab;
     [SerializeField] Transform itemParent;

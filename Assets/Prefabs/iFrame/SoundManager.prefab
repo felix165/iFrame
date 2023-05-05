@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 6819643065195111415}
   - component: {fileID: 6214592501853001022}
   - component: {fileID: 4572153935461611333}
+  - component: {fileID: 6557810135449948825}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -177,6 +178,8 @@ MonoBehaviour:
   sfxSound:
   - name: Click
     clip: {fileID: 8300000, guid: 4717e6f1fe9a47d4fb8c9991d22704e3, type: 3}
+  - name: ClickFailed
+    clip: {fileID: 8300000, guid: d1597df63c57dbe478838be981be4f74, type: 3}
   sfxSource: {fileID: 1570561896379057116}
 --- !u!114 &4572153935461611333
 MonoBehaviour:
@@ -194,15 +197,43 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 6214592501853001022}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Click
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6557810135449948825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6240696222282929233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96473e8e2514584088394724796edb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 75702172a6fcbba44ae3c475403cda30, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6214592501853001022}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ClickFailed
           m_BoolArgument: 0
         m_CallState: 2

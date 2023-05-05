@@ -1,16 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ObjectManager : MonoBehaviour
 {
     private GameObject frame;
-    GameObject picture;
-    Vector3 oriScale;
+    private GameObject picture;
+    [SerializeField]
+    private Transform frameObj;
+    [SerializeField]
+    private Transform pictureObj;
+    
+
+    [SerializeField]
+    private float transformSpeed = 0.04f;
+    [SerializeField]
+    private float scaleSpeed = 0.02f;
+
+    private Vector3 oriScale;
+    private Vector3 oriPosition;
     // Start is called before the first frame update
     void Start()
     {
         oriScale = this.transform.localScale;
+        oriPosition = this.transform.position;
+        Unselect();
     }
 
     // Update is called once per frame
@@ -20,13 +35,16 @@ public class ObjectManager : MonoBehaviour
     }
     public void setFrame(GameObject frame)
     {
-        Destroy(PlaceManager.instance.selectedObject.transform.Find("Frame").gameObject);
-        Instantiate(frame, PlaceManager.instance.selectedObject.transform);
+        GameObject.Find("DebugText").GetComponent<TMP_Text>().text = "SetFrame"+ frame.ToString();
+        destroyChild(frameObj.gameObject);
+        Instantiate(frame, frameObj);
+
     }
     public void setPicture(GameObject picture)
     {
-        Destroy(PlaceManager.instance.selectedObject.transform.Find("Picture").gameObject);
-        Instantiate(picture, PlaceManager.instance.selectedObject.transform);
+        GameObject.Find("DebugText").GetComponent<TMP_Text>().text = "SetPicture";
+        destroyChild(pictureObj.gameObject);
+        Instantiate(picture, pictureObj);
     }
     public GameObject getFrame()
     {
@@ -36,13 +54,42 @@ public class ObjectManager : MonoBehaviour
     {
         return picture;
     }
-    public void setScale(Vector3 scale)
+
+    void destroyChild(GameObject obj)
     {
-        this.transform.localScale= new Vector3(oriScale.x*scale.x, oriScale.y*scale.y, oriScale.z*scale.z);
+        for (var i = obj.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(obj.transform.GetChild(i).gameObject);
+        }
     }
-    public void resetScale()
+    public void transfromObject(Vector2 deltaPos)
     {
-        this.transform.localScale = oriScale;
+        transform.position += new Vector3(deltaPos.x, deltaPos.y, 0) * Time.deltaTime * transformSpeed;
+    }
+
+    public void scalingObject(Vector2 deltaRange)
+    {
+        transform.localScale += new Vector3(deltaRange.x,deltaRange.y,0) * Time.deltaTime * scaleSpeed;
+    }
+    public void ResetChange()
+    {
+        transform.localScale = oriScale;
+        transform.position = oriPosition;
+    }
+    
+    public void confirmChange()
+    {
+        oriScale = transform.localScale;
+        oriPosition= transform.position;
+    }
+
+    public void Selected()
+    {
+        transform.Find("SelectIndicator").transform.gameObject.SetActive(true);
+    }
+    public void Unselect()
+    {
+        transform.Find("SelectIndicator").transform.gameObject.SetActive(false);
     }
 
 }

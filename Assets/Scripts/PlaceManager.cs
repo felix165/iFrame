@@ -3,15 +3,16 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.XR.ARSubsystems;
 
 public class PlaceManager : MonoBehaviour
 {
-    public enum Direction
+    public enum TransformMode
     {
-        Up,
-        Down,
-        Right,
-        Left,
+        None,
+        Tranform,
+        Scale,
     }
     public enum Mode
     {
@@ -19,14 +20,16 @@ public class PlaceManager : MonoBehaviour
         SelectingMode,
         EditingMode,
     }
+
     //make enum for scale type (bigger/smaller)
-    public static PlaceManager instance;
+    public static PlaceManager Instance;
 
     private PlaceIndicator placeIndicator;
     public GameObject objectToPlace;
     public Camera arCamera;
     public LayerMask layerMask;
     static public Mode mode = Mode.MainMode;
+    static public TransformMode transformMode = TransformMode.None;
 
     public TextMeshProUGUI text; //For Debug use
 
@@ -47,15 +50,42 @@ public class PlaceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.touchCount> 0)
+        {
+            text.text = Input.touches[0].phase.ToString();
+            if (mode == Mode.MainMode)
+            {
+                SelectObject();
+            }
+            else if (mode == Mode.SelectingMode)
+            {
+                if (Input.touches[0].phase == TouchPhase.Moved)
+                {
+                    switch (transformMode)
+                    {
+                        case TransformMode.Tranform:
+                            selectedObject.GetComponent<ObjectManager>().transfromObject(Input.touches[0].deltaPosition);
+                            break;
+                        case TransformMode.Scale:
+                            selectedObject.GetComponent<ObjectManager>().scalingObject(Input.touches[0].deltaPosition);
+                            break;
+                    }
+                }
+                   
+            }
+        }     
     }
     public void PlaceObject()
     {
-        newPlacedObject = Instantiate(objectToPlace, placeIndicator.transform.position, Quaternion.identity);
-        if(newPlacedObject is null)
+        if(placeIndicator.gameObject.activeSelf == true)
         {
-            onClickFailed?.Invoke(); 
+            newPlacedObject = Instantiate(objectToPlace, placeIndicator.transform.position, Quaternion.Euler(0, 180, 0));
         }
+        if (newPlacedObject is null)
+        {
+            onClickFailed?.Invoke();
+        }
+
     }
 
     //Destroy Selected Object
@@ -78,19 +108,35 @@ public class PlaceManager : MonoBehaviour
     public void SelectObject()
     {
         RaycastHit hitObject;
-        Ray ray = arCamera.ScreenPointToRay(placeIndicator.ray);
-        if (Physics.Raycast(ray, out hitObject, 50f, layerMask))
+        if(Input.touches[0].phase == TouchPhase.Began)
         {
-            text.text = hitObject.transform.gameObject.ToString();
-            selectedObject = hitObject.transform.gameObject;
-            //Make selected object, a bit transparent or more shining
-            mode = Mode.SelectingMode;
-            onClickSuccess?.Invoke();
+            Ray ray = arCamera.ScreenPointToRay(Input.touches[0].position);
+            if (Physics.Raycast(ray, out hitObject, 50f, layerMask))
+            {
+                text.text = hitObject.transform.gameObject.ToString();
+                selectedObject = hitObject.transform.gameObject;
+                selectedObject.GetComponent<ObjectManager>().Selected();
+                //Make selected object, a bit transparent or more shining
+                mode = Mode.SelectingMode;
+                onClickSuccess?.Invoke();
+            }
+            else
+            {
+                onClickFailed?.Invoke();
+            }
         }
-        else
-        {
-            onClickFailed?.Invoke();
-        }
+    }
+    public void transformObject()
+    {
+        transformMode = TransformMode.Tranform;
+    }
+    public void scaleObject()
+    {
+        transformMode= TransformMode.Scale;
+    }
+    public void resetObject()
+    {
+        selectedObject.GetComponent<ObjectManager>().ResetChange();
     }
 
     //Exit Selecting Mode
@@ -105,9 +151,13 @@ public class PlaceManager : MonoBehaviour
             }
             else if (mode == Mode.SelectingMode)
             {
-                //Make selected object back to original state
+                selectedObject.GetComponent<ObjectManager>().confirmChange();
+                //[reset semula, atau reset setelah edit]
+                selectedObject.GetComponent<ObjectManager>().Unselect();
+                transformMode = TransformMode.None;
                 selectedObject = null;
                 mode = Mode.MainMode;
+                
             }
         }
         else
@@ -116,47 +166,26 @@ public class PlaceManager : MonoBehaviour
         }
     }
 
-    //Transform Selected Object
-    public void TransformObject(int direction)
-    {
-        if (selectedObject != null)
-        {
-            Vector3 pos = selectedObject.transform.position;
-            
-            switch ((Direction)direction)
-            {
-                case Direction.Up:
-                    pos.y += speed;
-                    break;
-                case Direction.Down:
-                    pos.y -= speed;
-                    break;
-                case Direction.Right:
-                    pos.x += speed;
-                    break;
-                case Direction.Left:
-                    pos.x -= speed;
-                    break;
-            }
-            selectedObject.transform.position = pos;
-        }
-        else
-        {
-            return;
-        }
-        
-    }
-
-    //Scalling Selected Object //Scale use input?
-
-    
     //Enter Editing Mode
     public void EditObject()
     {
         mode= Mode.EditingMode;
+        transformMode = TransformMode.None;
     }
 
-
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            Instance = this;
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
 
 
 

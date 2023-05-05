@@ -12,7 +12,7 @@ public class ItemButton : MonoBehaviour
     [HideInInspector] public ItemsScrollViewController itemsScrollViewController;
 
     [SerializeField] TextMeshProUGUI text;
-    public ItemsScrollViewController.Type type;
+    public Type type;
     [HideInInspector] public GameObject item;
     public Image image;
     // Start is called before the first frame update
@@ -23,20 +23,41 @@ public class ItemButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+ 
     }
     public void OnItemButtonClick()
     {
-        GameObject.Find("DebugText").GetComponent<TMP_Text>().text= "Selected "+ this.itemIndex+" type "+type;
+        var placeManager = FindObjectOfType<PlaceManager>();
+        if (placeManager == null)
+        {
+            GameObject.Find("DebugText").GetComponent<TMP_Text>().text = "null";
+        }
+        else
+        {
+            GameObject.Find("DebugText").GetComponent<TMP_Text>().text = PlaceManager.Instance.selectedObject.ToString();
+        }
         switch (type)
         {
-            case ItemsScrollViewController.Type.Frame:
-                PlaceManager.instance.selectedObject.GetComponent<ObjectManager>().setFrame(item);
+            case Type.Frame:
+                PlaceManager.Instance.selectedObject.GetComponent<ObjectManager>().setFrame(item);
                 break;
-            case ItemsScrollViewController.Type.Picture:
-                PlaceManager.instance.selectedObject.GetComponent<ObjectManager>().setPicture(item);
+            case Type.Picture:
+                PlaceManager.Instance.selectedObject.GetComponent<ObjectManager>().setPicture(item);
                 break;
         }
+
+        //GameObject.Find("DebugText").GetComponent<TMP_Text>().text = PlaceManager.instance.selectedObject.name.ToString();
+        /*if (type==Type.Frame)
+        {
+            GameObject.Find("DebugText").GetComponent<TMP_Text>().text = "on item buttonClick with " + type+"  ";
+*//*            PlaceManager.instance.selectedObject.GetComponent<ObjectManager>().setFrame(item);*//*
+        }
+        else
+        {
+            GameObject.Find("DebugText").GetComponent<TMP_Text>().text = "on item buttonClick with " + type+ "  ";
+*//*            PlaceManager.instance.selectedObject.GetComponent<ObjectManager>().setPicture(item);
+*//*
+        }*/
 
     }
 }
