@@ -79,7 +79,7 @@ public class PlaceManager : MonoBehaviour
     {
         if(placeIndicator.gameObject.activeSelf == true)
         {
-            newPlacedObject = Instantiate(objectToPlace, placeIndicator.transform.position, Quaternion.Euler(0, 180, 0));
+            newPlacedObject = Instantiate(objectToPlace, placeIndicator.transform.position, placeIndicator.transform.rotation * Quaternion.Euler(0, 180, 0));
         }
         if (newPlacedObject is null)
         {
