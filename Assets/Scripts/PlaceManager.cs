@@ -79,7 +79,10 @@ public class PlaceManager : MonoBehaviour
     {
         if(placeIndicator.gameObject.activeSelf == true)
         {
-            newPlacedObject = Instantiate(objectToPlace, placeIndicator.transform.position, placeIndicator.transform.rotation * Quaternion.Euler(0, 180, 0));
+            Quaternion rotation = placeIndicator.transform.rotation;
+            rotation.eulerAngles += new Vector3(90,0,0);
+            rotation.eulerAngles= new Vector3(rotation.eulerAngles.x, rotation.eulerAngles.y,0f);
+            newPlacedObject = Instantiate(objectToPlace, placeIndicator.transform.position, rotation);
         }
         if (newPlacedObject is null)
         {

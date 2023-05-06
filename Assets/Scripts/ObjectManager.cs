@@ -11,6 +11,8 @@ public class ObjectManager : MonoBehaviour
     private Transform frameObj;
     [SerializeField]
     private Transform pictureObj;
+    [SerializeField]
+    private Material pictMaterial; //kalau pakai material
     
 
     [SerializeField]
