@@ -100,8 +100,8 @@ public class ObjectManager : MonoBehaviour
     }
     void brightnessAdjustment(float newBrightness)
     {
-        newBrightness = Mathf.Clamp(newBrightness,0.01f,2f);
-        lastBrighness = newBrightness;
+        newBrightness = Mathf.Clamp(newBrightness,0.01f,1.2f);
+        
         var meshRenderers = GetComponentsInChildren<MeshRenderer>();
         foreach (var comp in meshRenderers)
         {
@@ -113,11 +113,14 @@ public class ObjectManager : MonoBehaviour
                 color.z = Mathf.Clamp01(color.z * oriBrightness * newBrightness);
                 color.w = 1f;
                 material.color = color;
+                Debug.Log(material.color);
             }
+            Debug.Log(comp.materials.Count().ToString());
         }
         oriBrightness =oriBrightness *lastBrighness/ newBrightness;
+        lastBrighness = newBrightness;
         GameObject.Find("DebugText").GetComponent<TMP_Text>().text += "    " + meshRenderers.Count() + "    " + meshRenderers[0].material.color.ToString()+ "  "+oriBrightness;
-        Debug.Log(newBrightness+"    " + meshRenderers.Count() + "    " + meshRenderers[0].material.color.ToString() + "  " + oriBrightness + "last: "+ lastBrighness);
+        Debug.Log(newBrightness+"    " + meshRenderers.Count() + "    " + meshRenderers[0].material.color.ToString() + "  " + oriBrightness + "    last: "+ lastBrighness);
 
     }
 

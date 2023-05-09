@@ -450,17 +450,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c86f67b13d079f4a81a02ee165bcfc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threshHold: 0.5
-  OnLightOn:
-    m_PersistentCalls:
-      m_Calls: []
-    m_CallsDirty: 1
-  OnLightOff:
-    m_PersistentCalls:
-      m_Calls: []
-    m_CallsDirty: 1
-  lightOn: 0
-  lightValue: 0
 --- !u!114 &1348002552 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8530314682086632352, guid: b43c68be767c72942920cf6f6a010bc3,
@@ -699,6 +688,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 615016411420123795, guid: 3e36d9ec29c298c40a4914553e9489e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 615016411420123799, guid: 3e36d9ec29c298c40a4914553e9489e1,
         type: 3}
