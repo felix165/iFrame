@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -22,6 +23,9 @@ public class ObjectManager : MonoBehaviour
 
     private Vector3 oriScale;
     private Vector3 oriPosition;
+    private float oriBrightness = 1f;
+    private float lastBrighness = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +37,8 @@ public class ObjectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        brightnessAdjustment(LightEstimations.brightness);   
+
     }
     public void setFrame(GameObject frame)
     {
@@ -92,6 +97,28 @@ public class ObjectManager : MonoBehaviour
     public void Unselect()
     {
         transform.Find("SelectIndicator").transform.gameObject.SetActive(false);
+    }
+    void brightnessAdjustment(float newBrightness)
+    {
+        newBrightness = Mathf.Clamp(newBrightness,0.01f,2f);
+        lastBrighness = newBrightness;
+        var meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        foreach (var comp in meshRenderers)
+        {
+            foreach(var material in comp.materials)
+            {
+                Vector4 color = material.color;
+                color.x = Mathf.Clamp01(color.x * oriBrightness * newBrightness);
+                color.y = Mathf.Clamp01(color.y * oriBrightness * newBrightness);
+                color.z = Mathf.Clamp01(color.z * oriBrightness * newBrightness);
+                color.w = 1f;
+                material.color = color;
+            }
+        }
+        oriBrightness =oriBrightness *lastBrighness/ newBrightness;
+        GameObject.Find("DebugText").GetComponent<TMP_Text>().text += "    " + meshRenderers.Count() + "    " + meshRenderers[0].material.color.ToString()+ "  "+oriBrightness;
+        Debug.Log(newBrightness+"    " + meshRenderers.Count() + "    " + meshRenderers[0].material.color.ToString() + "  " + oriBrightness + "last: "+ lastBrighness);
+
     }
 
 }
