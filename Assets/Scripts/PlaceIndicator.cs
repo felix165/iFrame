@@ -6,7 +6,8 @@ using UnityEngine.XR.ARSubsystems;
 public class PlaceIndicator : MonoBehaviour
 {
     private ARRaycastManager raycastManager;
-    private GameObject indicator;
+    [HideInInspector]
+    public GameObject indicator;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
     [HideInInspector]
     public Vector2 ray = new Vector2(Screen.width / 2, Screen.height / 2);
@@ -26,7 +27,8 @@ public class PlaceIndicator : MonoBehaviour
         {
             Pose hitPose = hits[0].pose;
             transform.position = hitPose.position;
-            transform.rotation = hitPose.rotation;
+            //transform.rotation = hitPose.rotation;
+            transform.rotation.SetEulerAngles(hitPose.rotation.x, hitPose.rotation.y, 0f);
             if (!indicator.activeInHierarchy)
             {
                 indicator.SetActive(true);

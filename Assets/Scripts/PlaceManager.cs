@@ -52,7 +52,7 @@ public class PlaceManager : MonoBehaviour
     {
         if(Input.touchCount> 0)
         {
-            text.text = Input.touches[0].phase.ToString();
+            //text.text = Input.touches[0].phase.ToString();
             if (mode == Mode.MainMode)
             {
                 SelectObject();
@@ -77,16 +77,20 @@ public class PlaceManager : MonoBehaviour
     }
     public void PlaceObject()
     {
-        if(placeIndicator.gameObject.activeSelf == true)
+        if(placeIndicator.indicator.activeSelf == true)
         {
-            Quaternion rotation = placeIndicator.transform.rotation;
-            rotation.eulerAngles += new Vector3(90,0,0);
-            rotation.eulerAngles= new Vector3(rotation.eulerAngles.x, rotation.eulerAngles.y,0f);
-            newPlacedObject = Instantiate(objectToPlace, placeIndicator.transform.position, rotation);
+            Quaternion rot = placeIndicator.transform.rotation;
+            //rotation.eulerAngles = new Vector3(rotation.eulerAngles.x, rotation.eulerAngles.y, 0f);
+            rot.eulerAngles += new Vector3(180, 0, 180);
+            newPlacedObject = Instantiate(objectToPlace, placeIndicator.transform.position, rot);
         }
         if (newPlacedObject is null)
         {
             onClickFailed?.Invoke();
+        }
+        else
+        {
+            onClickSuccess.Invoke();
         }
 
     }

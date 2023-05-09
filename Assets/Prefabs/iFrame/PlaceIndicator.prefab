@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db30bd83430d6024b9bbe233e2ab1cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indicator: {fileID: 0}
   ray: {x: 0, y: 0}
 --- !u!1 &752982762783547248
 GameObject:
@@ -70,14 +71,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 752982762783547248}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.058578003, y: 0.058578003, z: 0.058578003}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.038578, y: 0.038578, z: 0.058578003}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 752982761711366794}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &752982762783547250
 SpriteRenderer:
   m_ObjectHideFlags: 0
