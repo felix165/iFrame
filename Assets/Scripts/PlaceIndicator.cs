@@ -27,8 +27,8 @@ public class PlaceIndicator : MonoBehaviour
         {
             Pose hitPose = hits[0].pose;
             transform.position = hitPose.position;
-            //transform.rotation = hitPose.rotation;
-            transform.rotation.SetEulerAngles(hitPose.rotation.x, hitPose.rotation.y, 0f);
+            transform.rotation = hitPose.rotation;
+            //transform.rotation.SetEulerAngles(hitPose.rotation.x, hitPose.rotation.y, 0f);
             if (!indicator.activeInHierarchy)
             {
                 indicator.SetActive(true);

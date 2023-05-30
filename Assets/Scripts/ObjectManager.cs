@@ -100,7 +100,7 @@ public class ObjectManager : MonoBehaviour
     }
     void brightnessAdjustment(float newBrightness)
     {
-        newBrightness = Mathf.Clamp(newBrightness,0.01f,1.2f);
+        newBrightness = Mathf.Clamp(newBrightness,0.1f,1.2f);
         
         var meshRenderers = GetComponentsInChildren<MeshRenderer>();
         foreach (var comp in meshRenderers)

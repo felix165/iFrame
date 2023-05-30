@@ -5,15 +5,16 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.XR.ARSubsystems;
+using System;
 
 public class PlaceManager : MonoBehaviour
 {
-    public enum TransformMode
+    /*public enum TransformMode
     {
         None,
         Tranform,
         Scale,
-    }
+    }*/
     public enum Mode
     {
         MainMode,
@@ -29,7 +30,7 @@ public class PlaceManager : MonoBehaviour
     public Camera arCamera;
     public LayerMask layerMask;
     static public Mode mode = Mode.MainMode;
-    static public TransformMode transformMode = TransformMode.None;
+    /*static public TransformMode transformMode = TransformMode.None;*/
 
     public TextMeshProUGUI text; //For Debug use
 
@@ -59,19 +60,33 @@ public class PlaceManager : MonoBehaviour
             }
             else if (mode == Mode.SelectingMode)
             {
-                if (Input.touches[0].phase == TouchPhase.Moved)
+                
+                if(Input.touchCount==1)
                 {
-                    switch (transformMode)
+                    if (Input.touches[0].phase == TouchPhase.Moved)
                     {
-                        case TransformMode.Tranform:
-                            selectedObject.GetComponent<ObjectManager>().transfromObject(Input.touches[0].deltaPosition);
-                            break;
-                        case TransformMode.Scale:
-                            selectedObject.GetComponent<ObjectManager>().scalingObject(Input.touches[0].deltaPosition);
-                            break;
+                        selectedObject.GetComponent<ObjectManager>().transfromObject(Input.touches[0].deltaPosition);
+                        /*switch (transformMode)
+                        {
+                            case TransformMode.Tranform:
+                                selectedObject.GetComponent<ObjectManager>().transfromObject(Input.touches[0].deltaPosition);
+                                break;
+                            case TransformMode.Scale:
+                                selectedObject.GetComponent<ObjectManager>().scalingObject(Input.touches[0].deltaPosition);
+                                break;
+                        }*/
                     }
                 }
-                   
+                else if (Input.touchCount == 2)
+                {
+                    Vector2 touchZeroPrevPos = Input.touches[0].position - Input.touches[0].deltaPosition;
+                    Vector2 touchOnePrevPos = Input.touches[1].position - Input.touches[1].deltaPosition;
+
+                    Vector2 prevTouchDelta =touchZeroPrevPos- touchOnePrevPos;
+                    Vector2 touchDelta = Input.touches[0].position - Input.touches[1].position;
+
+                    selectedObject.GetComponent<ObjectManager>().scalingObject(prevTouchDelta - touchDelta);
+                }    
             }
         }     
     }
@@ -133,14 +148,14 @@ public class PlaceManager : MonoBehaviour
             }
         }
     }
-    public void transformObject()
+    /*public void transformObject()
     {
         transformMode = TransformMode.Tranform;
     }
     public void scaleObject()
     {
         transformMode= TransformMode.Scale;
-    }
+    }*/
     public void resetObject()
     {
         selectedObject.GetComponent<ObjectManager>().ResetChange();
@@ -159,9 +174,9 @@ public class PlaceManager : MonoBehaviour
             else if (mode == Mode.SelectingMode)
             {
                 selectedObject.GetComponent<ObjectManager>().confirmChange();
-                //[reset semula, atau reset setelah edit]
+                //[reset semula, atau reset setelah edit] -> edit
                 selectedObject.GetComponent<ObjectManager>().Unselect();
-                transformMode = TransformMode.None;
+/*                transformMode = TransformMode.None;*/
                 selectedObject = null;
                 mode = Mode.MainMode;
                 
@@ -177,7 +192,7 @@ public class PlaceManager : MonoBehaviour
     public void EditObject()
     {
         mode= Mode.EditingMode;
-        transformMode = TransformMode.None;
+ /*       transformMode = TransformMode.None;*/
     }
 
     void Awake()
